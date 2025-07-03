@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoomController;
 use Illuminate\Foundation\Application;
@@ -25,6 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('rooms/{room:slug}', [RoomController::class, 'show'])->name('rooms.show');
+
+    Route::get('rooms/rooms/{room:slug}/messages', [MessageController::class, 'index'])->name('message.index');
 });
 
 require __DIR__.'/auth.php';

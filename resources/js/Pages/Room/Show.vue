@@ -3,6 +3,18 @@
     import Header from '@/Components/Chat/Header.vue';
     import Messages from '@/Components/Chat/Messages.vue';
     import Footer from '@/Components/Chat/Footer.vue';
+    import { useMessageStore } from '@/store/useMessagesStore';
+
+    const messageStore = useMessageStore();
+
+    const props = defineProps({
+        room: {
+            type: Object,
+            required: true,
+        }
+    });
+
+    messageStore.fetchMessages(props.room.slug);
 </script>
 
 <template>
@@ -21,7 +33,7 @@
 
                 <!-- Page Content -->
                 <Messages />
-
+                {{ messageStore.allMessages }}
                 <!-- Page Footer -->
                 <Footer v-on:valid="console.log($event)" />
             </div>
